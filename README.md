@@ -1,4 +1,5 @@
-CST-407
+CST407 - Android Development
 =======
 
-CST 407 Android Projects
+CST 407 Android Projects List
+  - *Coming Soon*
