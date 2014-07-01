@@ -1,47 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:weightSum="3" >
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp" >
 
-    <EditText 
+    <EditText
         android:id="@+id/txtTest"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:hint="@string/text_hint"
+        android:layout_height="wrap_content"
         android:gravity="left|top"
-        android:inputType="textMultiLine"
+        android:hint="@string/text_hint"
         android:lines="10"
         android:scrollbars="vertical" />
-    
-    <LinearLayout
-        android:layout_width="fill_parent"
+
+    <Button
+        android:id="@+id/record_button"
+        style="@style/ButtonText"
+        android:layout_width="120dp"
+        android:paddingBottom="16dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:gravity="center|bottom" >
-        
-		<Button
-		    android:id="@+id/record_button"
-		    android:background="@drawable/btn_red"
-		    android:layout_width="0dip"
-		    android:layout_weight="1"
-		    android:layout_height="wrap_content"
-		    android:text="@string/record"
-		    android:layout_gravity="center"
-		    style="@style/ButtonText" />
-	
-		<Button
-		    android:id="@+id/play_button"
-		    android:background="@drawable/btn_blue"
-		    android:layout_width="0dip"
-		    android:layout_weight="1"
-		    android:layout_height="wrap_content"
-		    android:text="@string/play"
-		    android:layout_gravity="center"
-		    style="@style/ButtonText" />
-		
-	</LinearLayout>
-</LinearLayout>
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_red"
+        android:text="@string/record" />
+
+    <Button
+        android:id="@+id/play_button"
+        style="@style/ButtonText"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="16dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_blue"
+        android:text="@string/play" />
+
+</RelativeLayout>
