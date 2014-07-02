@@ -12,8 +12,13 @@ import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 	static final int REQUEST_IMAGE_CAPTURE = 1;
+	
+	static final String CAMERA_IMAGE_STORAGE 	= "imagebitmap";
+	static final String CAMERA_IMAGE_VISIBILITY = "imagevisible"; 
+	
 	private Button mIntendButton = null;
 	private ImageView mImageView = null;
+	private Bitmap mBitmapFromCam = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +41,8 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 			Bundle extras = data.getExtras();
-			Bitmap imageBitmap = (Bitmap) extras.get("data");
-			mImageView.setImageBitmap(imageBitmap);
+			mBitmapFromCam = (Bitmap) extras.get("data");
+			mImageView.setImageBitmap(mBitmapFromCam);
 		}
 	}
 
@@ -46,5 +51,22 @@ public class MainActivity extends Activity {
 		if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
 			startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 		}
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle state)
+	{
+		state.putParcelable(CAMERA_IMAGE_STORAGE, mBitmapFromCam);
+		state.putBoolean(CAMERA_IMAGE_VISIBILITY, (mImageView != null));
+		super.onSaveInstanceState(state);
+	}
+	
+	@Override
+	protected void onRestoreInstanceState (Bundle state)
+	{
+		mBitmapFromCam = (Bitmap)state.getParcelable(CAMERA_IMAGE_STORAGE);
+		mImageView.setImageBitmap(mBitmapFromCam);
+		Boolean visible = (Boolean)state.getBoolean(CAMERA_IMAGE_VISIBILITY);
+		if (visible) mImageView.setVisibility(0);
 	}
 }
