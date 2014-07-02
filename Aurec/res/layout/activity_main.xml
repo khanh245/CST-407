@@ -3,39 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp" >
+    android:layout_margin="16dp" >
 
     <EditText
         android:id="@+id/txtTest"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="left|top"
-        android:hint="@string/text_hint"
-        android:lines="10"
-        android:scrollbars="vertical" />
+        android:hint="@string/text_hint" />
 
     <Button
         android:id="@+id/record_button"
         style="@style/ButtonText"
-        android:layout_width="120dp"
-        android:paddingBottom="16dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
         android:background="@drawable/btn_red"
         android:text="@string/record" />
 
     <Button
         android:id="@+id/play_button"
         style="@style/ButtonText"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_alignParentBottom="true"
-        android:paddingBottom="16dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentRight="false"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="false"
+        android:layout_toStartOf="@id/record_button"
         android:background="@drawable/btn_blue"
         android:text="@string/play" />
 
