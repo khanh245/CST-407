@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">LayoutResources</string>
+	<string name="land_txt">The world looks flat</string>
+	<string name="port_txt">I feel so tall</string>
+	
+</resources>
