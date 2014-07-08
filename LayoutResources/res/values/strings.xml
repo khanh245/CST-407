@@ -1,7 +1,9 @@
 <resources>
 
-    <string name="app_name">LayoutResources</string>
+    <string name="app_name">Layout Resources</string>
 	<string name="land_txt">The world looks flat</string>
 	<string name="port_txt">I feel so tall</string>
 	
+	<string name="ctnDscFrench">Eiffel Tower</string>
+	<string name="ctnDscIta">Pisa Tower</string>
 </resources>
