@@ -14,7 +14,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_gravity="center"
-	    android:background="@drawable/eiffeltower"
-	    android:contentDescription="@string/ctnDscFrench" />
-	
+	    android:background="@drawable/leaningtower"
+	    android:contentDescription="@string/ctnDscIta" />    
+
 </LinearLayout>
