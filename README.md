@@ -8,6 +8,6 @@ CST 407 Android Projects List
     * https://github.com/khanh245/CST-407/tree/master/PhotoSnatch
   - **Homework 2**   - 
     * Part 1: Layout - https://github.com/khanh245/CST-407/tree/master/LayoutResources
-    * Part 2: State - 
-    * Part 3: Persistence
+    * Part 2: State - https://github.com/khanh245/CST-407/tree/master/SavingState
+    * Part 3: Persistence - TBD
   - *Coming Soon*
