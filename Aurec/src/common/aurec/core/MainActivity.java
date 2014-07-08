@@ -18,9 +18,14 @@ public class MainActivity extends Activity {
 	private Button recButton = null;
 	private Button playButton = null;
 	
+	private void initialize()
+	{
+		recButton = (Button)findViewById(R.id.record_button);
+		playButton = (Button)findViewById(R.id.play_button);
+	}	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
@@ -43,12 +48,6 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-	
-	private void initialize()
-	{
-		recButton = (Button)findViewById(R.id.record_button);
-		playButton = (Button)findViewById(R.id.play_button);
-	}	
 	
 	private void startRecord() {
 		
