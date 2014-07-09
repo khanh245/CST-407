@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">PersistentPreferences</string>
+	<string name="wish1">Wish 1</string>
+	<string name="wish2">Wish 2</string>
+	<string name="wish3">Wish 3</string>
+	<string name="x">X</string>
+	
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp" >
+
+    <ToggleButton
+        android:id="@+id/btnWish1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center" 
+        android:textOn="@string/wish1"
+        android:textOff="@string/x" />
+
+    <ToggleButton
+        android:id="@+id/btnWish2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:textOn="@string/wish2" 
+        android:textOff="@string/x" />
+
+    <ToggleButton
+        android:id="@+id/btnWish3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:textOn="@string/wish3"
+        android:textOff="@string/x" />
+
+</LinearLayout>
