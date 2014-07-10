@@ -12,7 +12,8 @@
         android:layout_weight="1"
         android:layout_gravity="center" 
         android:textOn="@string/wish1"
-        android:textOff="@string/x" />
+        android:textOff="@string/wish1"
+        android:onClick="ButtonOnClick" />
 
     <ToggleButton
         android:id="@+id/btnWish2"
@@ -21,7 +22,8 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:textOn="@string/wish2" 
-        android:textOff="@string/x" />
+        android:textOff="@string/wish2"
+        android:onClick="ButtonOnClick" />
 
     <ToggleButton
         android:id="@+id/btnWish3"
@@ -30,6 +32,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:textOn="@string/wish3"
-        android:textOff="@string/x" />
+        android:textOff="@string/wish3"
+        android:onClick="ButtonOnClick" />
 
 </LinearLayout>
