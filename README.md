@@ -9,5 +9,6 @@ CST 407 Android Projects List
   - **Homework 2**
     * Part 1: Layout - https://github.com/khanh245/CST-407/tree/master/LayoutResources
     * Part 2: State - https://github.com/khanh245/CST-407/tree/master/SavingState
-    * Part 3: Persistence - https://github.com/khanh245/CST-407/tree/master/PersistentPreferences
+  - **Homework 3**
+    * Persistence - https://github.com/khanh245/CST-407/tree/master/PersistentPreferences
   - *Coming Soon*
