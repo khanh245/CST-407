@@ -26,3 +26,6 @@ proguard/
 
 # Metadata folder
 .metadata/
+
+# Google Play Service Project Reference
+google-play-services_lib/
