@@ -14,5 +14,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mMap = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
+		mMap.setMyLocationEnabled(true);
 	}
 }
