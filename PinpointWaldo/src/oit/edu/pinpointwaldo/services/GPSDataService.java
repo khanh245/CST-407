@@ -1,15 +1,18 @@
 package oit.edu.pinpointwaldo.services;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
-import android.os.IBinder;
 
-public class GPSDataService extends Service {
+public class GPSDataService extends IntentService {
 
-	@Override
-	public IBinder onBind(Intent intent) {
+	public GPSDataService(String name) {
+		super(name);
 		
-		return null;
 	}
 
+	@Override
+	protected void onHandleIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		
+	}
 }
