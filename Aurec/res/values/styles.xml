@@ -2,9 +2,6 @@
 
     <style name="AppBaseTheme" parent="android:Theme.Light"></style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light"></style>
-
     <style name="ButtonText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
