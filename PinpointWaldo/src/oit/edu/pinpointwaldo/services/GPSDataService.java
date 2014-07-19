@@ -9,11 +9,6 @@ import android.os.IBinder;
 
 public class GPSDataService extends Service implements LocationListener {
 
-	public GPSDataService() {
-		super();
-		
-	}
-
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
