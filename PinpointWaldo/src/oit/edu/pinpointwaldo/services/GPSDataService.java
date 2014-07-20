@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.Toast;
@@ -51,7 +52,7 @@ public class GPSDataService extends Service implements LocationListener {
 	}
 
 	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) { }
+	public void onStatusChanged(final String provider, final int status, final Bundle extras) { }
 	
 	@Override
 	public void onProviderEnabled(String provider) {
