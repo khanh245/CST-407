@@ -54,6 +54,7 @@ public class MainActivity extends Activity {
 		mMap.getUiSettings().setAllGesturesEnabled(true);
 		
 		requestGPSService();
+		this.unregisterReceiver(mReceiver);
 	}
 
 	@Override
