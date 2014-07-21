@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 				if (loc != null) {
 					double lat = loc.getLatitude();
 					double lon = loc.getLongitude();
-					Log.d("Location: ", lat + ", " + lon);
+					Log.d("LOCATION", lat + ", " + lon);
 					LatLng coord = new LatLng(lat, lon);
 					
 					mMap.addMarker(new MarkerOptions().position(coord).title("Waldo!"));
