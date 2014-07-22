@@ -35,7 +35,7 @@ public class GPSDataService extends Service implements LocationListener {
 		Log.d("WALDO_SERVICE", "Service's stopped...");
 	}
 	
-	/// Service Implementation
+	// Service Implementation
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -43,7 +43,6 @@ public class GPSDataService extends Service implements LocationListener {
 
 	@Override
 	public void onCreate() {
-		super.onCreate();
 		
 		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
         if( status != ConnectionResult.SUCCESS) {
@@ -55,21 +54,19 @@ public class GPSDataService extends Service implements LocationListener {
 
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
 		if (mManager != null)
 			mManager.removeUpdates(this);
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		super.onStartCommand(intent, flags, startId);
 		Log.d("WALDO_SERVICE", "Service's started...");
 		initialize();
 		
 		return START_NOT_STICKY;
 	}
 
-	/// Location Listener Implementation
+	// Location Listener Implementation
 	@Override
 	public void onLocationChanged(Location location) {
 		Log.d("WALDO_SERVICE", "Location changed");
