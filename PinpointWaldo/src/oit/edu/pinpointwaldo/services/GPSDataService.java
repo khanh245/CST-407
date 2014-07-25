@@ -1,6 +1,6 @@
 package oit.edu.pinpointwaldo.services;
 
-import oit.edu.pinpointwaldo.MainActivity;
+import oit.edu.pinpointwaldo.WaldoMapFragment;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Criteria;
@@ -29,7 +29,7 @@ public class GPSDataService extends Service implements LocationListener {
 	}
 	
 	private void broadcast(Location loc) {
-		Intent i = new Intent("android.intent.action.MAIN").putExtra(MainActivity.GPS_LOCATION, loc);
+		Intent i = new Intent("android.intent.action.MAIN").putExtra(WaldoMapFragment.GPS_LOCATION, loc);
 		this.sendBroadcast(i);
 		this.stopSelf();
 		Log.d("WALDO_SERVICE", "Service's stopped...");
