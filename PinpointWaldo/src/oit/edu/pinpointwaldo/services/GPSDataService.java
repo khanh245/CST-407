@@ -1,7 +1,10 @@
 package oit.edu.pinpointwaldo.services;
 
 import oit.edu.pinpointwaldo.WaldoMapFragment;
+import android.app.AlertDialog;
 import android.app.Service;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
@@ -9,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ public class GPSDataService extends Service implements LocationListener {
 	private void broadcast(Location loc) {
 		Intent i = new Intent("android.intent.action.MAIN").putExtra(WaldoMapFragment.GPS_LOCATION, loc);
 		this.sendBroadcast(i);
+		// TODO: Not sure about this
 		this.stopSelf();
 		Log.d("WALDO_SERVICE", "Service's stopped...");
 	}
@@ -78,13 +83,29 @@ public class GPSDataService extends Service implements LocationListener {
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		Toast.makeText(getBaseContext(), provider + " enabled.",
+		Toast.makeText(this, provider + " enabled.",
 				Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		Toast.makeText(getBaseContext(), provider + " disabled.",
-				Toast.LENGTH_SHORT).show();
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this)
+				.setTitle("Pinpoint Waldo")
+				.setMessage("GPS is disabled. Please enable it in Settings");
+		
+		alertDialog.setPositiveButton("Settings", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				startActivity(i);
+			}
+		});
+		
+		alertDialog.setNegativeButton("Cancel", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
 	}
 }
