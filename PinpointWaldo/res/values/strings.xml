@@ -5,4 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="search_hint">Places&#8230;</string>
 
+    <string name="drawer_open_desc">Open Drawer</string>
+    <string name="drawer_close_desc">Close Drawer</string>
 </resources>

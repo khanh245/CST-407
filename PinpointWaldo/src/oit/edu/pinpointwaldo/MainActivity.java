@@ -6,16 +6,42 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	private DrawerLayout mDrawer = null;
+	private ActionBarDrawerToggle mDrawerToggle = null;
+	private CharSequence mTitle = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		mTitle = getTitle();
+		mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.drawable.ic_drawer, R.string.drawer_open_desc, R.string.drawer_close_desc) {
+
+			public void onDrawerClosed (View view) {
+				super.onDrawerClosed(view);
+				getActionBar().setTitle(mTitle);
+				invalidateOptionsMenu();
+			}
+			
+			public void onDrawerOpened (View view) {
+				super.onDrawerClosed(view);
+				getActionBar().setTitle(mTitle);
+				invalidateOptionsMenu();
+			}
+		};
+		
+		mDrawer.setDrawerListener(mDrawerToggle);
 		handleIntent(getIntent());
 	}
 
