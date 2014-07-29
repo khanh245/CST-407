@@ -38,12 +38,11 @@ public class MainActivity extends Activity {
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.drawable.ic_drawer, R.string.drawer_open_desc, R.string.drawer_close_desc) {
 
 			public void onDrawerClosed (View view) {
-				super.onDrawerClosed(view);
+				getActionBar().setTitle(mTitle);
 				invalidateOptionsMenu();
 			}
 			
 			public void onDrawerOpened (View view) {
-				super.onDrawerClosed(view);
 				getActionBar().setTitle(mTitle);
 				invalidateOptionsMenu();
 			}
@@ -67,25 +66,32 @@ public class MainActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		boolean open = mDrawer.isDrawerOpen(mDrawerList);
+		menu.findItem(R.id.action_search).setVisible(!open);
+		menu.findItem(R.id.action_setting).setVisible(!open);
+		
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        if (mDrawer != null)
-        	mDrawerToggle.syncState();
+        mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (mDrawer != null)
-        	mDrawerToggle.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
-          }
+        }
         
         return super.onOptionsItemSelected(item);
 	};

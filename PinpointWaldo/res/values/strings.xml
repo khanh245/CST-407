@@ -7,4 +7,10 @@
 
     <string name="drawer_open_desc">Open Drawer</string>
     <string name="drawer_close_desc">Close Drawer</string>
+    
+    <string-array name="drawer_array">
+        <item>Map</item>
+        <item>Search</item>
+        <item>Settings</item>
+    </string-array>
 </resources>
