@@ -1,32 +1,32 @@
 package oit.edu.pinpointwaldo;
 
 import oit.edu.pinpointwaldo.services.GPSDataService;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-
+import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 public class WaldoMapFragment extends Fragment {
 
 	public static final String GPS_LOCATION = "GPS_LOCATION";
 	private GoogleMap mMap = null;
 	private Marker mMarker = null;
+	private View root;
 
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
@@ -57,20 +57,33 @@ public class WaldoMapFragment extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		SupportMapFragment smf = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
-		if (smf != null) {
-			mMap = smf.getMap();
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		
+		root = inflater.inflate(R.layout.fragment_map, container, false);
+		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		if (mMap != null) {
+			mMap.getUiSettings().setAllGesturesEnabled(true);
+			requestGPSService();
 		}
-		mMap.getUiSettings().setAllGesturesEnabled(true);
-		requestGPSService();
+		
+		return root;
+	}
 
-		return inflater.inflate(R.layout.fragment_map, container, false);
+	@Override
+	public void onPause() {
+		super.onPause();
+		this.getActivity()
+				.getFragmentManager()
+				.beginTransaction()
+				.remove(this.getActivity().getFragmentManager()
+						.findFragmentById(R.id.map)).commit();
 	}
 
 	@Override
 	public void onDestroyView() {
-		LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mReceiver);
+		LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(
+				mReceiver);
 		super.onDestroyView();
 	}
 }

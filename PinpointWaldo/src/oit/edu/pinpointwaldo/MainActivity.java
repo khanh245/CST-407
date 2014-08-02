@@ -50,6 +50,8 @@ public class MainActivity extends Activity {
 		
 		mDrawer.setDrawerListener(mDrawerToggle);
 		handleIntent(getIntent());
+		
+		getFragmentManager().beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
 	}
 
 	@Override
