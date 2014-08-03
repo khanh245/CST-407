@@ -51,6 +51,7 @@ public class MainActivity extends Activity {
 		mDrawer.setDrawerListener(mDrawerToggle);
 		handleIntent(getIntent());
 		
+		/// TODO: Add a sign-in activity for pinpoint waldo
 		getFragmentManager().beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
 	}
 
