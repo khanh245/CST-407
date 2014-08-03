@@ -1,6 +1,5 @@
 package oit.edu.pinpointwaldo;
 
-import oit.edu.pinpointwaldo.services.GPSDataService;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
@@ -53,7 +52,6 @@ public class MainActivity extends Activity {
 		handleIntent(getIntent());
 		
 		getFragmentManager().beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
-		this.startService(new Intent(this, GPSDataService.class));
 	}
 
 	@Override

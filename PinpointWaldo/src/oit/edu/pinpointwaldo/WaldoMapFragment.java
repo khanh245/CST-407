@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +53,7 @@ public class WaldoMapFragment extends Fragment {
 
 	private void requestGPSService() {
 		IntentFilter filter = new IntentFilter("android.intent.action.WALDO");
-		LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mReceiver, filter);
+		getActivity().registerReceiver(mReceiver, filter);
 		getActivity().startService(new Intent(getActivity(), GPSDataService.class));
 	}
 
@@ -84,8 +83,7 @@ public class WaldoMapFragment extends Fragment {
 
 	@Override
 	public void onDestroyView() {
-		LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(
-				mReceiver);
+		getActivity().unregisterReceiver(mReceiver);
 		super.onDestroyView();
 	}
 }
