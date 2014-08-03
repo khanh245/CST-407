@@ -28,6 +28,8 @@ public class WaldoMapFragment extends Fragment {
 	private Marker mMarker = null;
 	private View root;
 
+	public WaldoMapFragment() { }
+	
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -51,7 +53,7 @@ public class WaldoMapFragment extends Fragment {
 	};
 
 	private void requestGPSService() {
-		IntentFilter filter = new IntentFilter("android.intent.action.MAIN");
+		IntentFilter filter = new IntentFilter("android.intent.action.WALDO");
 		LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mReceiver, filter);
 		getActivity().startService(new Intent(getActivity(), GPSDataService.class));
 	}
@@ -62,10 +64,10 @@ public class WaldoMapFragment extends Fragment {
 		
 		root = inflater.inflate(R.layout.fragment_map, container, false);
 		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-		if (mMap != null) {
+		if (mMap != null)
 			mMap.getUiSettings().setAllGesturesEnabled(true);
-			requestGPSService();
-		}
+
+		requestGPSService();
 		
 		return root;
 	}

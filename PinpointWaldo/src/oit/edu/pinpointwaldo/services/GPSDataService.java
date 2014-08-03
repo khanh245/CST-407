@@ -33,7 +33,7 @@ public class GPSDataService extends Service implements LocationListener {
 	}
 	
 	private void broadcast(Location loc) {
-		Intent i = new Intent("android.intent.action.MAIN").putExtra(WaldoMapFragment.GPS_LOCATION, loc);
+		Intent i = new Intent("android.intent.action.WALDO").putExtra(WaldoMapFragment.GPS_LOCATION, loc);
 		this.sendBroadcast(i);
 		this.stopSelf();
 		Log.d("WALDO_SERVICE", "Service's stopped...");
@@ -47,12 +47,14 @@ public class GPSDataService extends Service implements LocationListener {
 
 	@Override
 	public void onCreate() {
+		super.onCreate();
 		
 		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
         if( status != ConnectionResult.SUCCESS) {
             Log.e("LOCATION_SERVICE", "API NOT AVAILABLE");
             stopSelf();
         }
+        
         initialize();
 	}
 
@@ -60,6 +62,7 @@ public class GPSDataService extends Service implements LocationListener {
 	public void onDestroy() {
 		if (mManager != null)
 			mManager.removeUpdates(this);
+		super.onDestroy();
 	}
 
 	@Override
