@@ -17,4 +17,8 @@ CST407 - Android Development
     * Part 2: State - https://github.com/khanh245/CST-407/tree/master/SavingState
   - **Homework 3**
     * Persistence - https://github.com/khanh245/CST-407/tree/master/PersistentPreferences
+  - **Homework 4**
+    * Google Map v2: https://github.com/khanh245/CST-407/tree/master/PinpointWaldo
+  - **Homework 5**
+    * Notification Service: *Coming Soon to a Town Near You*
   - *Coming Soon*
