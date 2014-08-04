@@ -8,13 +8,15 @@ import android.os.Bundle;
 
 public class MainActivity extends Activity {
 
-	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+	private BroadcastReceiver mLocalRcvr = new BroadcastReceiver() {
+
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
 			
 		}
 	};
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -23,7 +25,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public void onDestroy() {
-		this.unregisterReceiver(mReceiver);
 		super.onDestroy();
 	}
 }
