@@ -1,6 +1,5 @@
 #CST407 - Android Development
-=======
-
+------
 ###CST 407 Android Projects List
   - **Aurec**           - An audio recorder for Android. Think of this as Audactiy.
     * https://github.com/khanh245/CST-407/tree/master/Aurec
