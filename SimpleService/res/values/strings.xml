@@ -1,5 +1,7 @@
 <resources>
 
     <string name="app_name">Simple Service</string>
-
+	<string name="start_txt">Start</string>
+	<string name="clear_txt">Clear</string>
+	
 </resources>

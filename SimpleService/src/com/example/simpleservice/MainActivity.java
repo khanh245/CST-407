@@ -11,6 +11,7 @@ public class MainActivity extends Activity {
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			
 		}
 	};
 
