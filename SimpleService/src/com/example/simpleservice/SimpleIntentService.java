@@ -5,23 +5,24 @@ import android.content.Intent;
 
 public class SimpleIntentService extends IntentService {
 
-	public static String INC_ACTION = "START";
-	public static String DEC_ACTION = "CLEAR";
+	public static String SERVICEACTION = "action";
 	private static int counter = 0;
-	
-	public SimpleIntentService() {
-		super("SIMPLE_INTENT_SERIVCE");
-	}
 
+	public SimpleIntentService() {
+		super("SimpleIntentService");
+	}
+	
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		String cmd = intent.getAction();
+		String cmd = intent.getStringExtra(SERVICEACTION);
 		
-		if(INC_ACTION.equalsIgnoreCase(cmd)) {
+		if(cmd.equalsIgnoreCase("start"))
 			++counter;
-		}
-		else if (DEC_ACTION.equalsIgnoreCase(cmd)) {
+		else if (cmd.equalsIgnoreCase("clear"))
 			counter = 0;
-		}
+		
+		Intent i = new Intent("SIMPLESERVICE").putExtra(MainActivity.COUNTER, counter);
+		this.sendBroadcast(i);
+		stopSelf();
 	}
 }
