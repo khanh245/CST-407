@@ -24,6 +24,7 @@ public class WaldoMapFragment extends Fragment {
 
 	public static final String GPS_LOCATION = "GPS_LOCATION";
 	private GoogleMap mMap = null;
+	private Location mLocation = null;
 	private Marker mMarker = null;
 	private View root;
 
@@ -32,29 +33,49 @@ public class WaldoMapFragment extends Fragment {
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Location loc = null;
-			loc = (Location) intent.getExtras().get(GPS_LOCATION);
-
-			if (loc != null) {
-				double lat = loc.getLatitude();
-				double lon = loc.getLongitude();
-				Log.d("LOCATION", lat + ", " + lon);
-				LatLng coord = new LatLng(lat, lon);
-
-				if (mMarker != null)
-					mMarker.remove();
-
-				mMarker = mMap.addMarker(new MarkerOptions().position(coord)
-						.title("Waldo!"));
-				mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coord, 17));
-			}
+			mLocation = (Location) intent.getExtras().get(GPS_LOCATION);
+			setLocation(mLocation);
 		}
 	};
 
+	private void setLocation(Location loc) {
+		if (loc != null) {
+			double lat = loc.getLatitude();
+			double lon = loc.getLongitude();
+			Log.d("LOCATION", lat + ", " + lon);
+			LatLng coord = new LatLng(lat, lon);
+
+			if (mMarker != null)
+				mMarker.remove();
+
+			mMarker = mMap.addMarker(new MarkerOptions().position(coord)
+					.title("Waldo!"));
+			mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coord, 17));
+		}		
+	}
+	
 	private void requestGPSService() {
 		IntentFilter filter = new IntentFilter("android.intent.action.WALDO");
 		getActivity().registerReceiver(mReceiver, filter);
 		getActivity().startService(new Intent(getActivity(), GPSDataService.class));
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.setRetainInstance(true);
+		
+		if(savedInstanceState != null) {
+			mLocation = (Location) savedInstanceState.get(GPS_LOCATION);
+			setLocation(mLocation);
+		}
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		if (mLocation != null)
+			outState.putParcelable(GPS_LOCATION, mLocation);
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -70,15 +91,13 @@ public class WaldoMapFragment extends Fragment {
 		
 		return root;
 	}
-
+	
 	@Override
-	public void onPause() {
-		super.onPause();
-		this.getActivity()
-				.getFragmentManager()
-				.beginTransaction()
-				.remove(this.getActivity().getFragmentManager()
-						.findFragmentById(R.id.map)).commit();
+	public void onResume() {
+		if (mMap == null) {
+			mMap = ((MapFragment)getActivity().getFragmentManager().findFragmentById(R.id.frame_container)).getMap();
+		}		
+		super.onResume();
 	}
 
 	@Override
@@ -86,4 +105,16 @@ public class WaldoMapFragment extends Fragment {
 		getActivity().unregisterReceiver(mReceiver);
 		super.onDestroyView();
 	}
+	
+	/*
+	@Override
+	public void onDestroy() {
+		if (getFragmentManager().findFragmentById(R.id.map) != null)
+			this.getActivity()
+			.getFragmentManager()
+			.beginTransaction()
+			.remove(this.getActivity().getFragmentManager()
+					.findFragmentById(R.id.map)).commit();
+		super.onDestroy();
+	}*/
 }

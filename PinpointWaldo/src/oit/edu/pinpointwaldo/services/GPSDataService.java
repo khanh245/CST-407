@@ -2,7 +2,7 @@ package oit.edu.pinpointwaldo.services;
 
 import oit.edu.pinpointwaldo.WaldoMapFragment;
 import android.app.AlertDialog;
-import android.app.Service;
+import android.app.IntentService;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
@@ -19,7 +18,12 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-public class GPSDataService extends Service implements LocationListener {
+public class GPSDataService extends IntentService implements LocationListener {
+
+	public GPSDataService() {
+		super("GPSDATASERVICE");
+		// TODO Auto-generated constructor stub
+	}
 
 	private LocationManager mManager = null;
 	private String provider = null;
@@ -40,10 +44,6 @@ public class GPSDataService extends Service implements LocationListener {
 	}
 	
 	// Service Implementation
-	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
-	}
 
 	@Override
 	public void onCreate() {
@@ -109,5 +109,10 @@ public class GPSDataService extends Service implements LocationListener {
 				dialog.cancel();
 			}
 		});
+	}
+
+	@Override
+	protected void onHandleIntent(Intent intent) {
+		
 	}
 }
