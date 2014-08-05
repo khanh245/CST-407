@@ -17,5 +17,5 @@
   - **Homework 4**
     * Google Map v2: https://github.com/khanh245/CST-407/tree/master/PinpointWaldo
   - **Homework 5**
-    * Notification Service: *Coming Soon to a Town Near You*
+    * Notification Service: https://github.com/khanh245/CST-407/tree/master/SimpleService
   - *Coming Soon*
