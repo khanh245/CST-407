@@ -2,15 +2,15 @@ package oit.edu.pinpointwaldo.services;
 
 import oit.edu.pinpointwaldo.WaldoMapFragment;
 import android.app.AlertDialog;
-import android.app.IntentService;
+import android.app.Service;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,28 +18,27 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-public class GPSDataService extends IntentService implements LocationListener {
+public class GPSDataService extends Service implements LocationListener {
 
+	/*
 	public GPSDataService() {
 		super("GPSDATASERVICE");
 		// TODO Auto-generated constructor stub
 	}
+	*/
 
 	private LocationManager mManager = null;
-	private String provider = null;
 
 	private void initialize() {
 		mManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
 		Location loc = mManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		broadcast(loc);
-		provider = mManager.getBestProvider(new Criteria(), false);
-		mManager.requestLocationUpdates(provider, 1000, 1, this);		
+		mManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, this);		
 	}
 	
 	private void broadcast(Location loc) {
 		Intent i = new Intent("android.intent.action.WALDO").putExtra(WaldoMapFragment.GPS_LOCATION, loc);
 		this.sendBroadcast(i);
-		this.stopSelf();
 		Log.d("WALDO_SERVICE", "Service's stopped...");
 	}
 	
@@ -62,6 +61,7 @@ public class GPSDataService extends IntentService implements LocationListener {
 	public void onDestroy() {
 		if (mManager != null)
 			mManager.removeUpdates(this);
+		this.stopSelf();
 		super.onDestroy();
 	}
 
@@ -112,7 +112,8 @@ public class GPSDataService extends IntentService implements LocationListener {
 	}
 
 	@Override
-	protected void onHandleIntent(Intent intent) {
-		
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -18,6 +18,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	
 	private DrawerLayout mDrawer = null;
 	private ActionBarDrawerToggle mDrawerToggle = null;
 	private CharSequence mTitle = null;
