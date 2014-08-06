@@ -69,15 +69,6 @@ public class MainActivity extends Activity {
 
 		return super.onCreateOptionsMenu(menu);
 	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		boolean open = mDrawer.isDrawerOpen(mDrawerList);
-		menu.findItem(R.id.action_search).setVisible(!open);
-		menu.findItem(R.id.action_setting).setVisible(!open);
-		
-		return super.onPrepareOptionsMenu(menu);
-	}
 	
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
