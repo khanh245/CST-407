@@ -6,13 +6,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import common.aurec.models.TrackListItem;
 
 public class TrackListViewAdapter extends BaseAdapter {
-
-	private ArrayList<TrackListItem> mList = null;
+	
 	private Context mContext = null;
+	private ArrayList<TrackListItem> mList = null;
 	
 	public TrackListViewAdapter(Context context) {
 		mContext = context;
@@ -44,4 +45,11 @@ public class TrackListViewAdapter extends BaseAdapter {
 		return null;
 	}
 
+	// Helper Class, Viewholder
+	static class Viewholder {
+		TextView trackName;
+		TextView trackLength;
+		TextView recordedDate;
+		TextView playing;
+	}
 }
