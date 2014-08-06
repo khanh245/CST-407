@@ -112,8 +112,5 @@ public class GPSDataService extends Service implements LocationListener {
 	}
 
 	@Override
-	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public IBinder onBind(Intent intent) { return null; }
 }

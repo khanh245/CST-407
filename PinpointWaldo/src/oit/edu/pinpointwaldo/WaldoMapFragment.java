@@ -26,7 +26,8 @@ public class WaldoMapFragment extends Fragment {
 	private GoogleMap mMap = null;
 	private Location mLocation = null;
 	private Marker mMarker = null;
-	private View root;
+	private View root = null;
+	private Intent mIntent = null;
 
 	public WaldoMapFragment() { }
 	
@@ -57,7 +58,10 @@ public class WaldoMapFragment extends Fragment {
 	private void requestGPSService() {
 		IntentFilter filter = new IntentFilter("android.intent.action.WALDO");
 		getActivity().registerReceiver(mReceiver, filter);
-		getActivity().startService(new Intent(getActivity(), GPSDataService.class));
+		if (mIntent == null)
+			mIntent = new Intent(getActivity(), GPSDataService.class);
+		
+		getActivity().startService(mIntent);
 	}
 
 	@Override
@@ -105,6 +109,9 @@ public class WaldoMapFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		getActivity().unregisterReceiver(mReceiver);
+		if (mIntent != null)
+			getActivity().stopService(mIntent);
+		
 		super.onDestroyView();
 	}
 	

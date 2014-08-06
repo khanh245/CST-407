@@ -2,6 +2,7 @@ package common.aurec.utils;
 
 import java.util.List;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,6 +10,11 @@ import android.widget.BaseAdapter;
 public class TrackListViewAdapter extends BaseAdapter {
 
 	private List<TrackListItem> mList = null;
+	private Context mContext = null;
+	
+	public TrackListViewAdapter(Context context) {
+		mContext = context;
+	}
 	
 	@Override
 	public int getCount() {
