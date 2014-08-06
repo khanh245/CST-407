@@ -1,19 +1,26 @@
 package common.aurec.utils;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import common.aurec.models.TrackListItem;
+
 public class TrackListViewAdapter extends BaseAdapter {
 
-	private List<TrackListItem> mList = null;
+	private ArrayList<TrackListItem> mList = null;
 	private Context mContext = null;
 	
 	public TrackListViewAdapter(Context context) {
 		mContext = context;
+	}
+	
+	public TrackListViewAdapter (Context context, ArrayList<TrackListItem> list) {
+		mContext = context;
+		mList = list;
 	}
 	
 	@Override
