@@ -1,6 +1,7 @@
 package oit.edu.pinpointwaldo;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Context;
@@ -122,20 +123,31 @@ public class MainActivity extends Activity {
 	}
 
 	private void selectItem(int position) {
-		FragmentManager fm = getFragmentManager();
 		
-		switch(position) {
-		case 0:
-			fm.beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
-			mDrawerList.setItemChecked(position, true);
-			mTitle = mDrawerMenu[position];
-			getActionBar().setTitle(mTitle);
-			break;
-		case 1:
+		if (!mDrawerList.isItemChecked(position)) {
+
+			Fragment frag = null;
 			
-			break;
+			switch(position) {
+			case 0:
+				frag = new WaldoMapFragment();
+				switchFrag(position, frag);
+				break;
+			case 1:
+				frag = new WaldoMapFragment();
+				switchFrag(position, frag);
+				break;
+			}
 		}
 		
 		mDrawer.closeDrawer(mDrawerList);
+	}
+	
+	private void switchFrag(int position, Fragment someFrag) {
+		FragmentManager fm = getFragmentManager();
+		fm.beginTransaction().replace(R.id.frame_container, someFrag).commit();
+		mDrawerList.setItemChecked(position, true);
+		mTitle = mDrawerMenu[position];
+		getActionBar().setTitle(mTitle);
 	}
 }
