@@ -1,6 +1,7 @@
 package oit.edu.pinpointwaldo;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -22,9 +25,9 @@ public class MainActivity extends Activity {
 	private DrawerLayout mDrawer = null;
 	private ActionBarDrawerToggle mDrawerToggle = null;
 	private CharSequence mTitle = null;
+	private String[] mDrawerMenu = null;
 	
-	private ListView mDrawerList = null;
-	
+	private ListView mDrawerList = null;	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,8 +36,12 @@ public class MainActivity extends Activity {
         getActionBar().setHomeButtonEnabled(true);
         
 		mTitle = getTitle();
+		mDrawerMenu = getResources().getStringArray(R.array.drawer_array);
 		mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_drawermenu);
+		
+		mDrawerList.setAdapter(new ArrayAdapter<String> (this, R.layout.drawer_list_item, mDrawerMenu ));
+		mDrawerList.setOnItemClickListener(new DrawerItemListListener());
 		
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.drawable.ic_drawer, R.string.drawer_open_desc, R.string.drawer_close_desc) {
 
@@ -52,8 +59,11 @@ public class MainActivity extends Activity {
 		mDrawer.setDrawerListener(mDrawerToggle);
 		handleIntent(getIntent());
 		
+		if (savedInstanceState == null)
+			selectItem(0);
+		
 		/// TODO: Add a sign-in activity for pinpoint waldo
-		getFragmentManager().beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
+		//getFragmentManager().beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
 	}
 
 	@Override
@@ -92,8 +102,7 @@ public class MainActivity extends Activity {
 	};
 	
 	@Override
-	protected void onNewIntent(Intent i)
-	{
+	protected void onNewIntent(Intent i) {
 		handleIntent(i);
 	}
 	
@@ -102,5 +111,31 @@ public class MainActivity extends Activity {
 			String query = i.getStringExtra(SearchManager.QUERY);
 			Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	private class DrawerItemListListener implements ListView.OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			selectItem (position);
+		}
+	}
+
+	private void selectItem(int position) {
+		FragmentManager fm = getFragmentManager();
+		
+		switch(position) {
+		case 0:
+			fm.beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
+			mDrawerList.setItemChecked(position, true);
+			mTitle = mDrawerMenu[position];
+			getActionBar().setTitle(mTitle);
+			break;
+		case 1:
+			
+			break;
+		}
+		
+		mDrawer.closeDrawer(mDrawerList);
 	}
 }

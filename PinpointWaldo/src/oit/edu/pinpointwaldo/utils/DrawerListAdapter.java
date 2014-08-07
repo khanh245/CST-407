@@ -2,13 +2,24 @@ package oit.edu.pinpointwaldo.utils;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class DrawerListAdapter extends BaseAdapter {
 
+	private Activity mContext = null;
 	private ArrayList<String> mList = null;
+	
+	public DrawerListAdapter(Activity context) {
+		mContext = context;
+	}
+	
+	public DrawerListAdapter(Activity context, ArrayList<String> list) {
+		mContext = context;
+		mList = list;
+	}
 	
 	@Override
 	public int getCount() {
@@ -27,7 +38,8 @@ public class DrawerListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		return null;
+		View rowView = convertView;
+		
+		return rowView;
 	}
-
 }

@@ -9,10 +9,12 @@
         android:showAsAction="collapseActionView|ifRoom"
         android:title="@string/action_search"/>
 
+    <!-- 
     <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_action_about"
         android:title="@string/action_about"
         android:showAsAction="always|withText"/>
-
+	-->
+	
 </menu>
