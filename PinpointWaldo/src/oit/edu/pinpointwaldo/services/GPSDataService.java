@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -38,7 +39,7 @@ public class GPSDataService extends Service implements LocationListener {
 	
 	private void broadcast(Location loc) {
 		Intent i = new Intent("android.intent.action.WALDO").putExtra(WaldoMapFragment.GPS_LOCATION, loc);
-		this.sendBroadcast(i);
+		LocalBroadcastManager.getInstance(this).sendBroadcast(i);
 		Log.d("WALDO_SERVICE", "Service's stopped...");
 	}
 	
