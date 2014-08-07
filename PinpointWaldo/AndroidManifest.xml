@@ -50,7 +50,7 @@
         <service
             android:name=".services.GPSDataService"
             android:exported="false"
-            android:process=":waldo_service" >
+            android:label="waldo_service">
         </service>
     </application>
 
