@@ -4,9 +4,15 @@
     <string name="action_search">Search</string>
     <string name="action_about">About</string>
     <string name="search_hint">Places&#8230;</string>
+    <string name="content_description">Application Icon</string>
 
     <string name="drawer_open_desc">Open Drawer</string>
     <string name="drawer_close_desc">Close Drawer</string>
+    
+    <string name="txtTitle">PINPOINT WALDO</string>
+    <string name="txtVersion">Version 1.0</string>
+    <string name="txtAuthor">Khanh Nguyen</string>
+    <string name="txtCopyright">Copyright \u00A9 2014</string>
     
     <string-array name="drawer_array">
         <item>Map</item>

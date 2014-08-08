@@ -60,9 +60,13 @@ public class MainActivity extends Activity {
 		mDrawer.setDrawerListener(mDrawerToggle);
 		handleIntent(getIntent());
 		
-		if (savedInstanceState == null)
-			selectItem(0);
-		
+		if (savedInstanceState == null) {
+			FragmentManager fm = getFragmentManager();
+			fm.beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
+			mDrawerList.setItemChecked(0, true);
+			mTitle = mDrawerMenu[0];
+			getActionBar().setTitle(mTitle);
+		}
 		/// TODO: Add a sign-in activity for pinpoint waldo
 	}
 
@@ -119,34 +123,34 @@ public class MainActivity extends Activity {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			selectItem (position);
 		}
-	}
-
-	private void selectItem(int position) {
 		
-		if (!mDrawerList.isItemChecked(position)) {
-
-			Fragment frag = null;
+		private void selectItem(int position) {
 			
-			switch(position) {
-			case 0:
-				frag = new WaldoMapFragment();
-				switchFrag(position, frag);
-				break;
-			case 1:
-				frag = new WaldoMapFragment();
-				switchFrag(position, frag);
-				break;
+			if (!mDrawerList.isItemChecked(position)) {
+
+				Fragment frag = null;
+				
+				switch(position) {
+				case 0:
+					frag = new WaldoMapFragment();
+					switchFrag(position, frag);
+					break;
+				case 1:
+					frag = new AboutFragment();
+					switchFrag(position, frag);
+					break;
+				}
 			}
+			
+			mDrawer.closeDrawer(mDrawerList);
 		}
 		
-		mDrawer.closeDrawer(mDrawerList);
-	}
-	
-	private void switchFrag(int position, Fragment someFrag) {
-		FragmentManager fm = getFragmentManager();
-		fm.beginTransaction().replace(R.id.frame_container, someFrag).commit();
-		mDrawerList.setItemChecked(position, true);
-		mTitle = mDrawerMenu[position];
-		getActionBar().setTitle(mTitle);
+		private void switchFrag(int position, Fragment someFrag) {
+			FragmentManager fm = getFragmentManager();
+			fm.beginTransaction().replace(R.id.frame_container, someFrag).commit();
+			mDrawerList.setItemChecked(position, true);
+			mTitle = mDrawerMenu[position];
+			getActionBar().setTitle(mTitle);
+		}		
 	}
 }

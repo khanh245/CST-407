@@ -65,17 +65,18 @@ public class WaldoMapFragment extends Fragment {
 		getActivity().startService(mIntent);
 	}
 
+	/*
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setRetainInstance(true);
 		
-		/*
 		if(savedInstanceState != null) {
 			mLocation = (Location) savedInstanceState.get(GPS_LOCATION);
 			setLocation(mLocation);
-		}*/
+		}
 	}
+	*/
 	
 	/*
 	@Override
