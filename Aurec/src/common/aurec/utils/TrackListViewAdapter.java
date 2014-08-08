@@ -1,6 +1,6 @@
 package common.aurec.utils;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -15,13 +15,13 @@ import common.aurec.models.TrackListItem;
 public class TrackListViewAdapter extends BaseAdapter {
 	
 	private Activity mContext = null;
-	private List<TrackListItem> mList = null;
+	private ArrayList<TrackListItem> mList = null;
 	
 	public TrackListViewAdapter(Activity context) {
 		mContext = context;
 	}
 	
-	public TrackListViewAdapter (Activity context, List<TrackListItem> list) {
+	public TrackListViewAdapter (Activity context, ArrayList<TrackListItem> list) {
 		mContext = context;
 		mList = list;
 	}
