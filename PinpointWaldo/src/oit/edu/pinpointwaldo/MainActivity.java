@@ -64,7 +64,6 @@ public class MainActivity extends Activity {
 			selectItem(0);
 		
 		/// TODO: Add a sign-in activity for pinpoint waldo
-		//getFragmentManager().beginTransaction().replace(R.id.frame_container, new WaldoMapFragment()).commit();
 	}
 
 	@Override

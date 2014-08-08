@@ -10,6 +10,6 @@
     
     <string-array name="drawer_array">
         <item>Map</item>
-        <item>Setting</item>
+        <item>About</item>
     </string-array>
 </resources>
