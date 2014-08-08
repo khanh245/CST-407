@@ -67,6 +67,10 @@ public class TrackListViewAdapter extends BaseAdapter {
 		
 		return rowView;
 	}
+	
+	public ArrayList<TrackListItem> getList() {
+		return (!mList.isEmpty() ? mList : null);
+	}
 
 	static class Viewholder {
 		TextView trackName;

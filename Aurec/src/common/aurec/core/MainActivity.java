@@ -39,7 +39,8 @@ public class MainActivity extends Activity {
 		tracks.add(new TrackListItem("Song 4", "09:00", "08/08/2014", null, true));
 		tracks.add(new TrackListItem("Song 5", "13:30", "08/08/2014", null, false));
 		
-		list.setAdapter(new TrackListViewAdapter(this, tracks));
+		TrackListViewAdapter lAdapter = new TrackListViewAdapter(this, tracks);
+		list.setAdapter(lAdapter);
 	}	
 
 	private void startRecord() {
