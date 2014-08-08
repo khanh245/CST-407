@@ -119,6 +119,8 @@ public class MainActivity extends Activity {
 	
 	private class DrawerItemListListener implements ListView.OnItemClickListener {
 
+		private int mCurrent = 0;
+		
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			selectItem (position);
@@ -126,8 +128,9 @@ public class MainActivity extends Activity {
 		
 		private void selectItem(int position) {
 			
-			if (!mDrawerList.isItemChecked(position)) {
+			if (mCurrent != position) {
 
+				mCurrent = position;
 				Fragment frag = null;
 				
 				switch(position) {

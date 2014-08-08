@@ -99,6 +99,7 @@ public class WaldoMapFragment extends Fragment {
 		return root;
 	}
 	
+	/*
 	@Override
 	public void onResume() {
 		if (mMap == null) {
@@ -106,6 +107,7 @@ public class WaldoMapFragment extends Fragment {
 		}		
 		super.onResume();
 	}
+	*/
 
 	@Override
 	public void onDestroyView() {
@@ -113,9 +115,20 @@ public class WaldoMapFragment extends Fragment {
 		if (mIntent != null)
 			getActivity().stopService(mIntent);
 		
+		Fragment frag = getActivity().getFragmentManager().findFragmentById(R.id.map);
+		if (frag != null && !getActivity().isDestroyed()) 
+			getActivity().getFragmentManager().beginTransaction().remove(frag).commit();
+		
 		super.onDestroyView();
 	}
 	
+	@Override
+	public void onPause() {
+		if (mIntent != null)
+			getActivity().stopService(mIntent);
+		
+		super.onPause();		
+	}
 	/*
 	@Override
 	public void onDestroy() {
