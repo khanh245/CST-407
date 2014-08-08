@@ -40,7 +40,6 @@ public class GPSDataService extends Service implements LocationListener {
 	private void broadcast(Location loc) {
 		Intent i = new Intent("android.intent.action.WALDO").putExtra(WaldoMapFragment.GPS_LOCATION, loc);
 		LocalBroadcastManager.getInstance(this).sendBroadcast(i);
-		Log.d("WALDO_SERVICE", "Service's stopped...");
 	}
 	
 	// Service Implementation
@@ -63,6 +62,8 @@ public class GPSDataService extends Service implements LocationListener {
 		if (mManager != null)
 			mManager.removeUpdates(this);
 		this.stopSelf();
+		Log.d("WALDO_SERVICE", "Service's stopped...");
+		
 		super.onDestroy();
 	}
 
