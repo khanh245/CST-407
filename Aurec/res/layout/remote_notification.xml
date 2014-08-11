@@ -20,10 +20,10 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:text="@string/dummyName"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="18sp" />
 
-    <TextView
+    <Chronometer
         android:id="@+id/rmtLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/dummyLength"
-        android:textSize="16sp" />
+        android:format="%s" />
 
     <LinearLayout
         android:id="@+id/buttonsView"
@@ -50,7 +50,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_action_pause"
-            android:text="@string/pause" />
+            android:text="@string/pause"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnNotifStop"
@@ -60,7 +61,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_action_stop"
-            android:text="@string/stop" />
+            android:text="@string/stop"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </RelativeLayout>

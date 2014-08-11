@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
 		@Override
-		public void onReceive(Context arg0, Intent arg1) {
+		public void onReceive(Context context, Intent intent) {
 			
 		}
 	};
@@ -109,6 +109,7 @@ public class MainActivity extends Activity {
 				Intent notificationIntent = new Intent(MainActivity.this, MainActivity.class);
 		        PendingIntent contentIntent = PendingIntent.getActivity(MainActivity.this, 0, notificationIntent, 0);
 		        notification.contentIntent = contentIntent;
+		        notification.flags = Notification.FLAG_NO_CLEAR;
 		        
 				mNotificationMgr.notify(10, notification);
 			}
@@ -133,6 +134,7 @@ public class MainActivity extends Activity {
 
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {
+					mNotificationMgr.cancelAll();
 					finish();
 				}
 			})
