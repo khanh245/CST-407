@@ -1,6 +1,10 @@
 package common.aurec.writers;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import android.os.Environment;
 import common.aurec.models.TrackAudio;
@@ -10,7 +14,7 @@ public abstract class TrackWriter {
 	protected static String AUREC_FOLDER = "Aurec";
 	protected static String AUREC_TEMP_FILE = "record_temp.raw";   
 	
-	protected String getFilename() {
+	public String getFilename() {
 		String filepath = Environment.getExternalStorageDirectory().getPath();
 		File file = new File(filepath, AUREC_FOLDER);
 
@@ -18,7 +22,13 @@ public abstract class TrackWriter {
 			file.mkdirs();
 		}
 
-		return (file.getAbsolutePath() + "/" + System.currentTimeMillis() + getFileExtension());
+		return (file.getAbsolutePath() + "/" + getRecordedDate() + getFileExtension());
+	}
+	
+	public String getRecordedDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
+		Date date = new Date();
+		return dateFormat.format(date);
 	}
 
 	protected void deleteTempFile() {

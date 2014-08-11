@@ -17,6 +17,7 @@ import common.aurec.writers.WriterTypes;
 
 public class TrackAudio implements Parcelable{
 	
+	// TRACK AUDIO NECCESSARY FORMATS
     public static final int BPP_16 = 16;
     public static final int BPP_24 = 24;
     public static final int BPP_32 = 32;
@@ -30,13 +31,14 @@ public class TrackAudio implements Parcelable{
     public static final int AUDIO_ENCODING_8 = AudioFormat.ENCODING_PCM_8BIT;
     public static final int AUDIO_ENCODING_16 = AudioFormat.ENCODING_PCM_16BIT;     
     
-    /// FOR RECORDING PURPOSES
+    /// FOR RECORDING PURPOSES, AUDIORECORD OBJECT
 	private AudioRecord mRecorder = null;
 	private boolean isRecording = false;
 	private Thread mRecordingThread = null;
 	private int mSamplingRate = 0;
 	private int mChannels = 0;
 	private int mAudioFormat = 0;
+	private int mBitsPerSample = 0;
 	private int mBufferSize = 0;
 
 	/// AUDIO TRACK PROPERTY
@@ -48,10 +50,18 @@ public class TrackAudio implements Parcelable{
 	/// EXTENSION WRITER
 	private TrackWriter mWriter = null;
 	
-	public TrackAudio(int sampleRate, int channels, int audioFormat) {
+	/**
+	 * Construct a TrackAudio Object with sample Rate
+	 * 
+	 * @param sampleRate     The sampling rate (44100, 48000)
+	 * @param channels		 The channels (Mono, stereo)
+	 * @param bitsPerSample	 The bits per sample (8, 16)
+	 */
+	public TrackAudio(int sampleRate, int channels, int encoding, int bitsPerSample) {
 		mSamplingRate = sampleRate;
 		mChannels = channels;
-		mAudioFormat = audioFormat;
+		mAudioFormat = encoding;
+		mBitsPerSample = bitsPerSample;
 		
 		mBufferSize = AudioRecord.getMinBufferSize(mSamplingRate, mChannels, mAudioFormat);
 	}
@@ -65,6 +75,7 @@ public class TrackAudio implements Parcelable{
 
 	public void startRecording() {
 		mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, mSamplingRate, mChannels, mAudioFormat, mBufferSize);
+		
 		mRecorder.startRecording();
 		isRecording = true;
 
@@ -132,7 +143,11 @@ public class TrackAudio implements Parcelable{
 					}
 				}
 			}
-
+			
+			mBuffer = data;
+			mName = mWriter.getFilename();
+			mDate = mWriter.getRecordedDate();
+			
 			try {
 				os.close();
 			} catch (IOException e) {
@@ -217,12 +232,20 @@ public class TrackAudio implements Parcelable{
 		this.mChannels = mChannels;
 	}
 
-	public byte getBitsPerSample() {
-		return (byte) mAudioFormat;
+	public int getAudioEncoding() {
+		return mAudioFormat;
 	}
 
-	public void setBitsPerSample(byte bits) {
-		this.mAudioFormat = bits;
+	public void setAudioEncoding(int encoding) {
+		this.mAudioFormat = encoding;
+	}
+	
+	public int getBitsPerSample() {
+		return mBitsPerSample;
+	}
+	
+	public void setBitsPerSample(int bits) {
+		mBitsPerSample = bits;
 	}
 	//endregion
 }
