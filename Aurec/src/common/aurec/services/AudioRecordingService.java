@@ -7,6 +7,11 @@ import android.util.Log;
 
 public class AudioRecordingService extends Service {
 
+	public final static String TRACK_NAME = "name";
+	public final static String TRACK_LENGTH = "length";
+	public final static String TRACK_DATE = "date";
+	public final static String TRACK_RECORDING = "isRecording";
+	
 	@Override
 	public IBinder onBind(Intent intent) { return null; }
 

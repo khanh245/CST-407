@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/rmtTrackName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ellipsize="end"
+        android:maxWidth="250dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@string/dummyName"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/rmtLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/dummyLength"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/buttonBars"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rmtTrackName"
+        android:divider="?android:attr/dividerHorizontal"
+        android:orientation="vertical"
+        android:showDividers="middle" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:id="@+id/buttonsView"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:divider="?android:attr/dividerHorizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnNotifRec"
+                android:drawableLeft="@drawable/ic_action_pause"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/pause" />
+
+            <Button
+                android:id="@+id/btnNotifStop"
+                android:drawableLeft="@drawable/ic_action_stop"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/stop" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

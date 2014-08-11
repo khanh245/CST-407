@@ -1,38 +1,28 @@
 package common.aurec.core;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.media.MediaRecorder;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RemoteViews;
 
 import common.aurec.R;
-import common.aurec.models.TrackListItem;
-import common.aurec.utils.TrackListViewAdapter;
 
-public class MainActivity extends Activity {
-	
-	private Thread mThread = null;
-	private MediaRecorder mRecorder = null;
-	private Boolean isRecording = false;
-	private Boolean isPlaying = false;
-	
-	private Button recButton = null;
-	private Button playButton = null;
-	private ListView list = null;
-	
-	private void initialize()
-	{
-		recButton = (Button)findViewById(R.id.record_button);
-		playButton = (Button)findViewById(R.id.play_button);
-		list = (ListView) findViewById(R.id.list_test);
-		
-		ArrayList<TrackListItem> tracks = new ArrayList<TrackListItem>();
+/**
+ * 
+ * @author Khanh
+ * @brief Code Snippet for Adding Track into Adapter
+ * 
+ * 		ArrayList<TrackListItem> tracks = new ArrayList<TrackListItem>();
 		tracks.add(new TrackListItem("Song 1", "03:00", "08/08/2014", null, false ));
 		tracks.add(new TrackListItem("Song 2", "04:00", "08/08/2014", null, false));
 		tracks.add(new TrackListItem("Song 3", "05:30", "08/08/2014", null, false));
@@ -41,6 +31,34 @@ public class MainActivity extends Activity {
 		
 		TrackListViewAdapter lAdapter = new TrackListViewAdapter(this, tracks);
 		list.setAdapter(lAdapter);
+ */
+
+public class MainActivity extends Activity {
+	
+	private Boolean isRecording = false;
+	private Boolean isPlaying = false;
+	
+	private Button recButton = null;
+	private Button playButton = null;
+	private ListView list = null;
+	
+	private NotificationManager mNotificationMgr = null;
+	
+	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context arg0, Intent arg1) {
+			
+		}
+	};
+	
+	private void initialize()
+	{
+		recButton = (Button)findViewById(R.id.record_button);
+		playButton = (Button)findViewById(R.id.play_button);
+		list = (ListView) findViewById(R.id.list_test);
+		
+		mNotificationMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}	
 
 	private void startRecord() {
@@ -80,6 +98,14 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				isRecording = !isRecording;
 				startRecord();
+				RemoteViews notView = new RemoteViews(getPackageName(), R.layout.remote_notification);
+				notView.setTextViewText(R.id.rmtTrackName, "TEST");
+				notView.setTextViewText(R.id.rmtLength, "04:00");
+				Notification notification = new NotificationCompat.Builder(getApplicationContext()).setContent(notView)
+						.setContentText("Test")
+						.setContentTitle("Title Test")
+						.build();
+				mNotificationMgr.notify(NotificationRecordActivity.RECORDING_NOTIFICATION, notification);
 			}
 		});
 		

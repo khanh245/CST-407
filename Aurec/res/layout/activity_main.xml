@@ -11,8 +11,7 @@
         android:layout_above="@+id/record_button"
         android:layout_alignParentTop="true"
         android:gravity="left|top"
-        android:background="@android:color/background_light"
-        android:hint="@string/text_hint" />
+        android:background="@android:color/background_light" />
 
     <Button
         android:id="@+id/record_button"

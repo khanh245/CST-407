@@ -15,7 +15,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:scrollHorizontally="true"
-        android:text="You Can Win If You Want this should be long enough or not"
+        android:text="@string/dummyName"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
-        android:text="08/16/2014"
+        android:text="@string/dummyDate"
         android:textSize="12sp" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="01:00"
+        android:text="@string/dummyLength"
         android:textSize="12sp" />
 
 </RelativeLayout>

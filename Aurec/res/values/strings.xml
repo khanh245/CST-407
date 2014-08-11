@@ -1,8 +1,15 @@
 <resources>
 
     <string name="app_name">Aurec</string>
+    
     <string name="record">Record</string>
 	<string name="play">Play</string>
-	<string name="text_hint">Test EditText</string>
+	<string name="stop">Stop</string>
+	<string name="pause">Pause</string>
+	<string name="resume">Resume</string>
+
+	<string name="dummyName">Hello, this is a text. This should be long enough to go out of the width</string>
+	<string name="dummyDate">08/10/2014</string>
+	<string name="dummyLength">10:00</string>
 	
 </resources>
