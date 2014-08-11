@@ -2,7 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:divider="?android:attr/dividerHorizontal"
+    android:orientation="vertical"
+    android:showDividers="middle"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
 
     <TextView
         android:id="@+id/rmtTrackName"
@@ -16,7 +20,7 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:text="@string/dummyName"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
@@ -27,50 +31,36 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="@string/dummyLength"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <LinearLayout
-        android:id="@+id/buttonBars"
+        android:id="@+id/buttonsView"
+        style="?android:attr/buttonBarStyle"
+        android:layout_below="@id/rmtTrackName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rmtTrackName"
         android:divider="?android:attr/dividerHorizontal"
-        android:orientation="vertical"
-        android:showDividers="middle" >
+        android:orientation="horizontal" >
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:background="#000000" />
-
-        <LinearLayout
-            android:id="@+id/buttonsView"
-            style="?android:attr/buttonBarStyle"
-            android:layout_width="fill_parent"
+        <Button
+            android:id="@+id/btnNotifRec"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal" >
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_pause"
+            android:text="@string/pause" />
 
-            <Button
-                android:id="@+id/btnNotifRec"
-                android:drawableLeft="@drawable/ic_action_pause"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="@string/pause" />
-
-            <Button
-                android:id="@+id/btnNotifStop"
-                android:drawableLeft="@drawable/ic_action_stop"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="@string/stop" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnNotifStop"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_action_stop"
+            android:text="@string/stop" />
     </LinearLayout>
 
 </RelativeLayout>

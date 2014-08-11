@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -101,11 +102,15 @@ public class MainActivity extends Activity {
 				RemoteViews notView = new RemoteViews(getPackageName(), R.layout.remote_notification);
 				notView.setTextViewText(R.id.rmtTrackName, "TEST");
 				notView.setTextViewText(R.id.rmtLength, "04:00");
+				
 				Notification notification = new NotificationCompat.Builder(getApplicationContext()).setContent(notView)
-						.setContentText("Test")
-						.setContentTitle("Title Test")
+						.setSmallIcon(R.drawable.ic_launcher)
 						.build();
-				mNotificationMgr.notify(NotificationRecordActivity.RECORDING_NOTIFICATION, notification);
+				Intent notificationIntent = new Intent(MainActivity.this, MainActivity.class);
+		        PendingIntent contentIntent = PendingIntent.getActivity(MainActivity.this, 0, notificationIntent, 0);
+		        notification.contentIntent = contentIntent;
+		        
+				mNotificationMgr.notify(10, notification);
 			}
 		});
 		
