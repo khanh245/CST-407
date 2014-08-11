@@ -1,6 +1,5 @@
 package common.aurec.models;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,7 +7,6 @@ import java.io.IOException;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -40,7 +38,7 @@ public class TrackAudio implements Parcelable{
 	private int mChannels = 0;
 	private int mAudioFormat = 0;
 	private int mBufferSize = 0;
-	
+
 	/// AUDIO TRACK PROPERTY
 	private String mName = null;
 	private String mLength = null;
@@ -166,7 +164,7 @@ public class TrackAudio implements Parcelable{
         }
     };
     
-    // Getters and Setters
+    //region Getters And Setters
 	public String getName() {
 		return mName;
 	}
@@ -202,4 +200,29 @@ public class TrackAudio implements Parcelable{
 	public int getBufferSize() {
 		return mBufferSize;
 	}
+	
+	public int getSamplingRate() {
+		return mSamplingRate;
+	}
+
+	public void setSamplingRate(int mSamplingRate) {
+		this.mSamplingRate = mSamplingRate;
+	}
+
+	public int getChannels() {
+		return mChannels;
+	}
+
+	public void setChannels(int mChannels) {
+		this.mChannels = mChannels;
+	}
+
+	public byte getBitsPerSample() {
+		return (byte) mAudioFormat;
+	}
+
+	public void setBitsPerSample(byte bits) {
+		this.mAudioFormat = bits;
+	}
+	//endregion
 }

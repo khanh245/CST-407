@@ -35,9 +35,9 @@ public class WavWriter extends TrackWriter {
 		FileOutputStream out = null;
 		long totalAudioLen = 0;
 		long totalDataLen = totalAudioLen + 36;
-		long longSampleRate = 44100;
+		long longSampleRate = mTrack.getSamplingRate();
 		int channels = 2;
-		long byteRate = 16 * 44100 * channels / 8;
+		long byteRate = mTrack.getBitsPerSample() * longSampleRate * channels / 8;
 
 		byte[] data = new byte[mTrack.getBufferSize()];
 
@@ -103,7 +103,7 @@ public class WavWriter extends TrackWriter {
 		header[31] = (byte) ((byteRate >> 24) & 0xff);
 		header[32] = (byte) (2 * 16 / 8); // block align
 		header[33] = 0;
-		header[34] = 16; // bits per sample
+		header[34] = mTrack.getBitsPerSample(); // bits per sample
 		header[35] = 0;
 		header[36] = 'd';
 		header[37] = 'a';

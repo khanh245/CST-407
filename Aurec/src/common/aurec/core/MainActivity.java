@@ -16,7 +16,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
+//import android.widget.ListView;
 import android.widget.RemoteViews;
 
 import common.aurec.R;
@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
 
 	private Button recButton = null;
 	private Button playButton = null;
-	private ListView list = null;
+	//private ListView list = null;
 
 	private NotificationManager mNotificationMgr = null;
 	private Intent mServiceIntent = null;
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 	private void initialize() {
 		recButton = (Button) findViewById(R.id.record_button);
 		playButton = (Button) findViewById(R.id.play_button);
-		list = (ListView) findViewById(R.id.list_test);
+		//list = (ListView) findViewById(R.id.list_test);
 
 		mNotificationMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mServiceIntent = new Intent(this, AudioRecordingService.class);
@@ -112,6 +112,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		initialize();
+		
+		//region SetClickListener
 		recButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -129,6 +131,7 @@ public class MainActivity extends Activity {
 				startPlay();
 			}
 		});
+		//endregion
 	}
 
 	@Override

@@ -10,10 +10,6 @@ public abstract class TrackWriter {
 	protected static String AUREC_FOLDER = "Aurec";
 	protected static String AUREC_TEMP_FILE = "record_temp.raw";   
 	
-	public TrackWriter() {
-		
-	}
-	
 	protected String getFilename() {
 		String filepath = Environment.getExternalStorageDirectory().getPath();
 		File file = new File(filepath, AUREC_FOLDER);
