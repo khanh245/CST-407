@@ -21,7 +21,7 @@
         </activity>
         
         <service android:name=".SimpleIntentService"
-            android:process=":simple_service" />
+            android:label=":simple_service" />
     </application>
 
 </manifest>

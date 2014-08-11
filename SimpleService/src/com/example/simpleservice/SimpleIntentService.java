@@ -2,6 +2,7 @@ package com.example.simpleservice;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 
 public class SimpleIntentService extends IntentService {
 
@@ -22,7 +23,7 @@ public class SimpleIntentService extends IntentService {
 			counter = 0;
 		
 		Intent i = new Intent("SIMPLESERVICE").putExtra(MainActivity.COUNTER, counter);
-		this.sendBroadcast(i);
+		LocalBroadcastManager.getInstance(this).sendBroadcast(i);
 		stopSelf();
 	}
 }
