@@ -1,5 +1,7 @@
 package common.aurec.core;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -11,17 +13,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-//import android.widget.ListView;
+import android.widget.ListView;
 import android.widget.RemoteViews;
 
 import common.aurec.R;
 import common.aurec.models.TrackAudio;
+import common.aurec.models.TrackListItem;
 import common.aurec.services.AudioRecordingService;
+import common.aurec.utils.TrackListViewAdapter;
 
 /**
  * 
@@ -44,13 +49,17 @@ import common.aurec.services.AudioRecordingService;
 public class MainActivity extends Activity {
 
 	public static final String TRACK_OBJ = "track";
+	public static final String NOTIFICATION_OBJ = "notification";
 
+	private ArrayList<TrackListItem> tracks = null;
+	private TrackListViewAdapter adapter = null;
+	
 	private Boolean isRecording = false;
 	private Boolean isPlaying = false;
 
 	private Button recButton = null;
 	private Button playButton = null;
-	//private ListView list = null;
+	private ListView list = null;
 
 	private NotificationManager mNotificationMgr = null;
 	private Intent mServiceIntent = null;
@@ -59,19 +68,30 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			showNotification(intent);
+			String cmd = intent.getAction();
+			Log.d("Receive", cmd);
+			
+			if (cmd.equalsIgnoreCase("aurec.NOTIFICATION_ACTION")) {
+				Log.d("Receive", "NOTIFICATION_ACTION");
+				showNotification(intent);
+			}
+			else if (cmd.equalsIgnoreCase("aurec.RECORD_ACTION")) {
+				Log.d("Receive", "RECORD_ACTION");
+				addTrack(intent);
+			}
 		}
 	};
 
 	private void initialize() {
 		recButton = (Button) findViewById(R.id.record_button);
 		playButton = (Button) findViewById(R.id.play_button);
-		//list = (ListView) findViewById(R.id.list_test);
+		list = (ListView) findViewById(R.id.list_test);
 
 		mNotificationMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mServiceIntent = new Intent(this, AudioRecordingService.class);
 
 		IntentFilter filter = new IntentFilter("aurec.RECORD_ACTION");
+		filter.addAction("aurec.NOTIFICATION_ACTION");
 		LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, filter);
 	}
 
@@ -111,6 +131,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		tracks = new ArrayList<TrackListItem> ();
 		initialize();
 		
 		//region SetClickListener
@@ -132,6 +153,22 @@ public class MainActivity extends Activity {
 			}
 		});
 		//endregion
+		
+		if (savedInstanceState != null) {
+			ArrayList<TrackListItem> TRACKS = savedInstanceState.getParcelableArrayList("LIST_TRACKS");
+			
+			if (TRACKS != null) {
+				TrackListViewAdapter adap = new TrackListViewAdapter(this, TRACKS);
+				list.setAdapter(adap);
+			}
+		}
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		if (adapter != null)
+			outState.putParcelableArrayList("LIST_TRACKS", adapter.getList());
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -158,13 +195,12 @@ public class MainActivity extends Activity {
 	}
 
 	private void showNotification(Intent received) {
-		TrackAudio obj = (TrackAudio) received.getExtras().get(TRACK_OBJ);
-
+		TrackAudio obj = (TrackAudio) received.getExtras().get(NOTIFICATION_OBJ);
+		RemoteViews notView = new RemoteViews(getPackageName(),	R.layout.remote_notification);
+		
 		if (obj != null) {
-			RemoteViews notView = new RemoteViews(getPackageName(),	R.layout.remote_notification);
 			notView.setTextViewText(R.id.rmtTrackName, obj.getName());
-			notView.setTextViewText(R.id.rmtLength, obj.getLength());
-
+			notView.setChronometer(R.id.rmtChronoLength, SystemClock.elapsedRealtime(), "00:%s", true);
 			Notification notification = new NotificationCompat.Builder(getApplicationContext()).setContent(notView)
 												.setSmallIcon(R.drawable.ic_launcher)
 												.build();
@@ -176,5 +212,16 @@ public class MainActivity extends Activity {
 
 			mNotificationMgr.notify(10, notification);
 		}
+	}
+	
+	private void addTrack(Intent received) {
+		TrackAudio obj = (TrackAudio) received.getExtras().get(TRACK_OBJ);
+		
+		tracks.add(new TrackListItem(obj.getName(), obj.getLength(), obj.getDate(), null, false));
+		
+		if (adapter == null)
+			adapter = new TrackListViewAdapter(this, tracks);
+		
+		list.setAdapter(adapter);
 	}
 }

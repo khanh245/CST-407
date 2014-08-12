@@ -12,7 +12,6 @@ import common.aurec.models.TrackAudio;
 public class WavWriter extends TrackWriter {
 
 	private static final String TRACK_EXTENSION = ".wav";
-	private TrackAudio mTrack = null;
 	
 	public WavWriter() {
 		super();

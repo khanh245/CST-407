@@ -33,13 +33,14 @@ public class TrackAudio implements Parcelable{
     
     /// FOR RECORDING PURPOSES, AUDIORECORD OBJECT
 	private AudioRecord mRecorder = null;
-	private boolean isRecording = false;
+	private boolean recording = false;
 	private Thread mRecordingThread = null;
 	private int mSamplingRate = 0;
 	private int mChannels = 0;
 	private int mAudioFormat = 0;
 	private int mBitsPerSample = 0;
 	private int mBufferSize = 0;
+	private long recordingTime = 0;
 
 	/// AUDIO TRACK PROPERTY
 	private String mName = null;
@@ -77,7 +78,8 @@ public class TrackAudio implements Parcelable{
 		mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, mSamplingRate, mChannels, mAudioFormat, mBufferSize);
 		
 		mRecorder.startRecording();
-		isRecording = true;
+		recordingTime = System.nanoTime();
+		recording = true;
 
 		mRecordingThread = new Thread(new Runnable() {
 
@@ -88,13 +90,18 @@ public class TrackAudio implements Parcelable{
 		}, "AudioRecorder Thread");
 
 		mRecordingThread.start();
+        setName(mWriter.getRecordedDate() + mWriter.getFileExtension());
+        setDate(mWriter.getRecordedDate());
 	}
 	
 	public void stopRecording() {
         if(null != mRecorder){
-            isRecording = false;
+            recording = false;
            
             mRecorder.stop();
+            recordingTime = System.nanoTime() - recordingTime;
+            setLength(String.valueOf((double)recordingTime / 1000000000.0));
+            Log.d("Length", getLength());
             mRecorder.release();
            
             mRecorder = null;
@@ -132,7 +139,7 @@ public class TrackAudio implements Parcelable{
 		int read = 0;
 
 		if (null != os) {
-			while (isRecording) {
+			while (recording) {
 				read = mRecorder.read(data, 0, mBufferSize);
 
 				if (AudioRecord.ERROR_INVALID_OPERATION != read) {
@@ -145,7 +152,7 @@ public class TrackAudio implements Parcelable{
 			}
 			
 			mBuffer = data;
-			mName = mWriter.getFilename();
+			mName = mWriter.getRecordedDate() + mWriter.getFileExtension();
 			mDate = mWriter.getRecordedDate();
 			
 			try {
@@ -246,6 +253,10 @@ public class TrackAudio implements Parcelable{
 	
 	public void setBitsPerSample(int bits) {
 		mBitsPerSample = bits;
+	}
+	
+	public boolean isRecording() {
+		return recording;
 	}
 	//endregion
 }

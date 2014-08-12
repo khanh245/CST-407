@@ -13,6 +13,7 @@ public abstract class TrackWriter {
 	
 	protected static String AUREC_FOLDER = "Aurec";
 	protected static String AUREC_TEMP_FILE = "record_temp.raw";   
+	protected TrackAudio mTrack = null;
 	
 	public String getFilename() {
 		String filepath = Environment.getExternalStorageDirectory().getPath();

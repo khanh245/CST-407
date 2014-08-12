@@ -1,6 +1,9 @@
 package common.aurec.models;
 
-public class TrackListItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class TrackListItem implements Parcelable {
 	
 	private String TrackName = "";
 	private String TrackLength = "";
@@ -27,6 +30,13 @@ public class TrackListItem {
 		Playing = play;
 	}
 	
+	public TrackListItem(Parcel in) {
+		TrackName = in.readString();
+		TrackLength = in.readString();
+		DateRecorded = in.readString();
+		in.readByteArray(Buffer);
+	}
+
 	public String getTrackName() {
 		return TrackName;
 	}
@@ -66,4 +76,27 @@ public class TrackListItem {
 	public void setPlaying(Boolean play) {
 		Playing = play;
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel out, int flags) {
+		out.writeString(TrackName);
+		out.writeString(TrackLength);
+		out.writeString(DateRecorded);
+		out.writeByteArray(Buffer);
+	}
+	
+    public static final Parcelable.Creator<TrackListItem> CREATOR = new Parcelable.Creator<TrackListItem>() {
+        public TrackListItem createFromParcel(Parcel in) {
+            return new TrackListItem(in);
+        }
+
+        public TrackListItem[] newArray(int size) {
+            return new TrackListItem[size];
+        }
+    };	
 }
