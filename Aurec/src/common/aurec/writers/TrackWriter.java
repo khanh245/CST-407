@@ -27,7 +27,7 @@ public abstract class TrackWriter {
 	}
 	
 	public String getRecordedDate() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.getDefault());
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
