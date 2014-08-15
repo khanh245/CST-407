@@ -34,13 +34,11 @@ import common.aurec.utils.TrackListViewAdapter;
  * @brief Code Snippet for Adding Track into Adapter
  * 
  *        ArrayList<TrackListItem> tracks = new ArrayList<TrackListItem>();
- *        tracks.add(new TrackListItem("Song 1", "03:00", "08/08/2014", null,
- *        false )); tracks.add(new TrackListItem("Song 2", "04:00",
- *        "08/08/2014", null, false)); tracks.add(new TrackListItem("Song 3",
- *        "05:30", "08/08/2014", null, false)); tracks.add(new
- *        TrackListItem("Song 4", "09:00", "08/08/2014", null, true));
- *        tracks.add(new TrackListItem("Song 5", "13:30", "08/08/2014", null,
- *        false));
+ *        tracks.add(new TrackListItem("Song 1", "03:00", "08/08/2014", null, false)); 
+ * 		  tracks.add(new TrackListItem("Song 2", "04:00", "08/08/2014", null, false));
+ *        tracks.add(new TrackListItem("Song 3", "05:30", "08/08/2014", null, false)); 
+ *        tracks.add(new TrackListItem("Song 4", "09:00", "08/08/2014", null, true));
+ *        tracks.add(new TrackListItem("Song 5", "13:30", "08/08/2014", null, false));
  * 
  *        TrackListViewAdapter lAdapter = new TrackListViewAdapter(this,
  *        tracks); list.setAdapter(lAdapter);
