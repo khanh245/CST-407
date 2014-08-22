@@ -91,9 +91,10 @@ public class WaldoMapFragment extends Fragment {
 		
 		root = inflater.inflate(R.layout.fragment_map, container, false);
 		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-		if (mMap != null)
+		if (mMap != null) {
 			mMap.getUiSettings().setAllGesturesEnabled(true);
-
+			mMap.getUiSettings().setIndoorLevelPickerEnabled(true);
+		}
 		requestGPSService();
 		
 		return root;
